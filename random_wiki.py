@@ -22,18 +22,16 @@ def get_website():
         
     print(title, '\n----------')
     user_conf = input('Would you like to see this website? (Y/N)')
-    page = [title]
         
     if user_conf.lower() == 'y':
         try:
-            page.append(page_dom.find_all('p'))
+            page = page_dom.find_all('p')
+            return title, page
         except:
-            url = None
-    
-    return page
+            return None
 
-page = get_website()
+website = get_website()
 
-with open(f'websites/{page[0]}.html', 'w', encoding='UTF-8') as file:
-    file.write(str(page))
-    
+if website != None:
+    with open(f'websites/{website[0]}.html', 'w', encoding='UTF-8') as file:
+        file.write(str(website))
